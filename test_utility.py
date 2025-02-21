@@ -38,4 +38,23 @@ def feature_target_sample(housing_data_sample):
 def test_data_split(feature_target_sample):
     return_tuple = data_split(*feature_target_sample)
     # TODO test if the length of return_tuple is 4
-    raise NotImplemented
+    # raise NotImplemented
+
+    # Test if the length of return_tuple is 4
+    assert len(return_tuple) == 4, "data_split should return exactly four outputs."
+    
+    # (Optional) You can add more validation tests below, e.g.:
+    X_train, X_test, y_train, y_test = return_tuple
+    
+    # Check that the train and test data are not empty
+    assert len(X_train) > 0, "X_train should not be empty"
+    assert len(X_test) > 0, "X_test should not be empty"
+    assert len(y_train) > 0, "y_train should not be empty"
+    assert len(y_test) > 0, "y_test should not be empty"
+
+    # Check that the sum of lengths equals the original data length
+    original_length = len(feature_target_sample[0])
+    assert (len(X_train) + len(X_test)) == original_length, \
+        "Combined train and test features should match original feature count"
+    assert (len(y_train) + len(y_test)) == len(feature_target_sample[1]), \
+        "Combined train and test targets should match original target count"
